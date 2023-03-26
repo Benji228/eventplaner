@@ -15,75 +15,39 @@
 
         <!--Task Timeline-->
         <label for="timeline">Timeline:</label><br />
-        <div class="timeline_container_">
+        <div id="timeline" class="timeline_container_">
           <input
             type="date"
             id="timelinestart"
             name="timelinestart"
-            formControlName="datestart"
+            formControlName="dateStart"
           />
           <input
             type="date"
             id="timelineend"
             name="timelineend"
-            formControlName="dateend"
+            formControlName="dateEnd"
           /><br />
         </div>
         <br />
 
         <!--Categorys-->
-        <label for="categorys">Categorys:</label><br />
-        <div class="categorys_">
+        <label for="categories">Categorys:</label><br />
+        <div *ngFor="let category of categories" id="categories" class="categorys_">
           <input
             type="radio"
-            id="design"
-            name="fav_language"
-            value="design"
+            [id]="category.name"
             formControlName="category"
+            [value]="category.name"
           />
-          <label for="design">Design</label><br />
-
-          <input
-            type="radio"
-            id="games"
-            name="fav_language"
-            value="games"
-            formControlName="category"
-          />
-          <label for="games">Games</label><br />
-
-          <input
-            type="radio"
-            id="cooking"
-            name="fav_language"
-            value="cooking"
-            formControlName="category"
-          />
-          <label for="cooking">Cooking</label><br />
-
-          <input
-            type="radio"
-            id="setup"
-            name="fav_language"
-            value="setup"
-            formControlName="category"
-          />
-          <label for="setup">Set Up</label><br />
-
-          <input
-            type="radio"
-            id="cleanup"
-            name="fav_language"
-            value="cleanup"
-            formControlName="category"
-          />
-          <label for="cleanup">Clean Up</label><br />
+          <label [for]="category.name">{{category.name}}</label><br />
         </div>
         <br />
 
         <!--Task Description-->
         <label for="date">Task Description:</label><br />
         <textarea
+          id="date"
           name="message"
           rows="10"
           cols="30"
@@ -92,23 +56,45 @@
         </textarea>
       </div>
 
-      <div class="dialog_rightside_">
-        <label for="participants">Participants:</label><br />
-        <input
-          type="text"
-          id="participants"
-          name="fname"
-          formControlName="participants"
-        /><br />
+      <mat-form-field class="example-chip-list" appearance="fill">
+        <mat-label>Favorite Fruits</mat-label>
+        <mat-chip-grid #chipGrid aria-label="Fruit selection" formControlName="participants">
+          <mat-chip-row *ngFor="let participant of participantsString" (removed)="remove(participant)">
+            {{participant}}
+            <button matChipRemove [attr.aria-label]="'remove ' + participant">
+              <mat-icon>cancel</mat-icon>
+            </button>
+          </mat-chip-row>
+        </mat-chip-grid>
+        <input placeholder="New Fruit..." #participantInput [formControl]="participantCtrl"
+               [matChipInputFor]="chipGrid" [matAutocomplete]="auto"
+               [matChipInputSeparatorKeyCodes]="separatorKeysCodes"
+               (matChipInputTokenEnd)="add($event)"/>
+        <mat-autocomplete #auto="matAutocomplete" (optionSelected)="selected($event)">
+          <mat-option *ngFor="let participant of filteredParticipants | async" [value]="participant">
+            {{participant}}
+          </mat-option>
+        </mat-autocomplete>
+      </mat-form-field>
 
+      <div class="dialog_rightside_">
         <label for="subtask">Subtask:</label><br />
         <input
           type="text"
           id="subtask"
           name="lname"
-          formControlName="subtasks"
+          [(ngModel)]="subtask"
+          [ngModelOptions]="{standalone: true}"
         /><br />
       </div>
+      <a (click)="onClickAddSubTask()">create subtask</a>
+
+      <ul>
+        <li *ngFor="let subtask of subtasks; let i = index">
+          <span>{{subtask}}</span>
+          <span (click)="onClickRemoveSubTask(i)">| X</span>
+        </li>
+      </ul>
     </div>
   </mat-dialog-content>
 

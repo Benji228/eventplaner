@@ -17,7 +17,7 @@
           <div id="newTask_circle_"></div>
           <h2>New Task</h2>
         </div>
-        <app-new-task-card></app-new-task-card>
+        <app-new-task-card *ngFor="let task of tasks" [task]="task"></app-new-task-card>
       </div>
 
       <div class="inProgress_container_ main_content_botside_container_">
@@ -32,8 +32,8 @@
           <div id="doneTask_circle_"></div>
           <h2>Done Task</h2>
         </div>
-        
+
       </div>
     </div>
-  </div> 
+  </div>
 </body>

@@ -7,20 +7,22 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { MatSlideToggleModule } from '@angular/material/slide-toggle';
 import { NavbarComponent } from './navbar/navbar.component';
 import {MatDialogModule} from '@angular/material/dialog';
-import { NewTaskDialogComponent } from './new-task-dialog/new-task-dialog.component'; 
-import {MatChipsModule} from '@angular/material/chips'; 
+import { NewTaskDialogComponent } from './new-task-dialog/new-task-dialog.component';
+import {MatChipsModule} from '@angular/material/chips';
 import {MatDatepickerModule} from '@angular/material/datepicker';
-import {MatFormFieldModule} from '@angular/material/form-field'; 
+import {MatFormFieldModule} from '@angular/material/form-field';
 import {MatInputModule} from '@angular/material/input';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { MatNativeDateModule } from '@angular/material/core';
-import {MatExpansionModule} from '@angular/material/expansion'; 
+import {MatExpansionModule} from '@angular/material/expansion';
 import {MatSnackBarModule} from '@angular/material/snack-bar';
 import {HttpClientModule} from '@angular/common/http';
-import {MatCardModule} from '@angular/material/card'; 
+import {MatCardModule} from '@angular/material/card';
 import {MatButtonModule} from '@angular/material/button';
 import {MatIconModule} from '@angular/material/icon';
 import { NewTaskCardComponent } from './new-task-card/new-task-card.component';
+import {MatSelectModule} from "@angular/material/select";
+import {MatAutocompleteModule} from "@angular/material/autocomplete";
 
 @NgModule({
   declarations: [
@@ -47,7 +49,9 @@ import { NewTaskCardComponent } from './new-task-card/new-task-card.component';
     HttpClientModule,
     MatCardModule,
     MatButtonModule,
-    MatIconModule
+    MatIconModule,
+    MatSelectModule,
+    MatAutocompleteModule
   ],
   providers: [],
   bootstrap: [AppComponent]

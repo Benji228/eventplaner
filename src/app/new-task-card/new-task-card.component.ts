@@ -1,4 +1,5 @@
-import { Component } from '@angular/core';
+import {Component, Input} from '@angular/core';
+import {Task} from "../shared/model/task.model";
 
 @Component({
   selector: 'app-new-task-card',
@@ -6,5 +7,7 @@ import { Component } from '@angular/core';
   styleUrls: ['./new-task-card.component.css']
 })
 export class NewTaskCardComponent {
+
+  @Input() task!: Task;
 
 }
